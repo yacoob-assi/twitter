@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>profile</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="stylesheet" th:href="@{/css/profile.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.min.css }" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="leftBar">
+        <a th:href="index"> <i class="fa-solid fa-house"></i></a>
+        <a th:href="notification"> <i class="fa-regular fa-bell"></i></a>
+        <a th:href="profile"> <i class="fa-regular fa-user"></i></a>
+        <div class="addPost">
+          <a href=""> <i class="fa-solid fa-plus"></i></a>
+          <a href=""> <i class="fa-solid fa-feather"></i></a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="profileBack">
+          <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+          <div class="name">
+            <h3>name</h3>
+            <span id="postsNum">14k posts</span>
+          </div>
+        </div>
+        <div class="profileImages">
+          <div id="imageFront"></div>
+        </div>
+
+        <div class="follow">
+          <button>Follow</button>
+        </div>
+
+        <div class="ProfileInfo">
+          <div class="name">
+            <h2>name</h2>
+            <span>@tage</span>
+          </div>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum,
+            voluptas. Praesentium magni ea molestiae porro similique, illum,
+            ipsum provident modi sit cupiditate ratione optio. Quod laudantium
+            blanditiis earum labore accusantium.
+          </p>
+
+          <div id="locationAndDate">
+            <div id="location">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>location</span>
+            </div>
+
+            <div id="date">
+              <i class="fa-regular fa-calendar-days"></i>
+              <span>25-6-1999</span>
+            </div>
+          </div>
+
+          <div id="followersAndFollowing">
+            <div id="following">
+              <span>180</span>
+              <span>Following</span>
+            </div>
+
+            <div id="followers">
+              <span>180</span>
+              <span>Followers</span>
+            </div>
+          </div>
+
+          <div id="activitesList">
+            <span>Posts</span>
+            <span>Media</span>
+            <span>Likes</span>
+          </div>
+
+          <!-- <div class="post">
+            <div class="personInfo">
+              <div>
+                <span class="image"></span>
+                <span class="name">name</span>
+                <span class="tag">@tag</span>
+                <span class="date">-18h</span>
+              </div>
+
+              <i class="fa-solid fa-ellipsis" class="postDots"></i>
+            </div>
+            <p>
+              اربك تكست هو اول موقع يسمح لزواره الكرام بتحويل الكتابة العربي الى
+              كتابة مفهومة من قبل اغلب برامج التصميم مثل الفوتوشوب و
+              الافترايفكتس و البريمير و الافد ميدا كومبوزر و السموك و برامج اخرى
+              كثيرة
+            </p>
+
+            <div class="postImage"></div>
+
+            <div class="postStats">
+              <div class="comment">
+                <i class="fa-regular fa-comment"></i>
+                <span class="commentsNum">18</span>
+              </div>
+
+              <div class="share">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span class="sharesNum">18</span>
+              </div>
+
+              <div class="like">
+                <i class="fa-regular fa-heart"></i>
+                <span class="likessNum">18</span>
+              </div>
+
+              <div class="statistcs">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span class="statistcsNum">18</span>
+              </div>
+            </div>
+          </div> -->
+          <div id="content">
+            <div class="media">
+              <img src="/images/image.jpg" alt="" />
+              <img src="/images/image.jpg" alt="" />
+              <img src="/images/image.jpg" alt="" />
+              <img src="/images/image.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="trends">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+          <i class="fa-solid fa-xmark"></i>
+
+          <!-- ---------------if there no searches  
+          <div class="trendsList">
+            Try searching for people, lists, or keywords
+          </div> ------------------->
+
+          <!-- ----------------if there searches 
+          <div class="trendsList">
+            <div class="recent">
+              <span>Recent</span>
+              <span>Clear all</span>
+            </div>
+
+            <div class="recentList">
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+          </div> -------------------->
+        </div>
+
+        <div class="trendsForYou">
+          <h3>Trends for you</h3>
+
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <span class="showMore">Show more</span>
+        </div>
+
+        <div class="whoToFollow">
+          <h3>Who to follow</h3>
+          <div class="toFollow">
+            <div class="info">
+              <span class="image"></span>
+              <div class="name">
+                <span>name</span>
+                <span>@tag</span>
+              </div>
+            </div>
+            <button>Follow</button>
+          </div>
+
+          <span class="showMore">Show more</span>
+        </div>
+      </div>
+    </div>
+    <script src="@{/js/main.js}"></script>
+  </body>
+</html>

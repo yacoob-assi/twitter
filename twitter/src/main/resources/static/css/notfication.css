@@ -1,0 +1,33 @@
+.note{
+    display: flex;
+    align-items: center;
+ 
+    gap:2px;
+    min-height: 100px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.note .data{
+        font-size: 14px;
+}
+
+.note h3{
+    color:var(--main-text-color)
+}
+
+.note .image{
+    position: relative
+}
+
+.note i{
+    position: absolute;
+    right:10px;
+    top: 10px;
+    color: var(--main-text-color);
+    font-size: 18px;
+    transition: 0.3s;
+}
+

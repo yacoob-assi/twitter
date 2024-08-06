@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyTwitter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="leftBar">
+        <a th:href="index"> <i class="fa-solid fa-house"></i></a>
+        <a th:href="notification"> <i class="fa-regular fa-bell"></i></a>
+        <a th:href="profile"> <i class="fa-regular fa-user"></i></a>
+        <div th:class="addPost">
+          <a href=""> <i class="fa-solid fa-plus"></i></a>
+          <a href=""> <i class="fa-solid fa-feather"></i></a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="topBar">
+          <ul>
+            <li>For you</li>
+            <li>Following</li>
+            <li>X News</li>
+          </ul>
+        </div>
+
+        <div class="searchBox">
+          <span class="target">Everyone</span>
+          <div class="image"></div>
+
+          <textarea
+            id="myTextarea"
+            type="text"
+            oninput="autoResize()"
+            placeholder="What is happening?!!"
+          ></textarea>
+
+          <!-- Add any additional form elements as needed -->
+
+          <span class="reply">
+            <i class="fa-solid fa-earth-americas"></i>
+            Everyone can reply
+          </span>
+          <div class="bottom">
+            <div class="icons">
+              <i id="imagePicker" class="fa-solid fa-image"></i>
+              <i class="fa-regular fa-face-smile"></i>
+              <i class="fa-solid fa-video"></i>
+            </div>
+            <button id="post" onclick="submitForm(event)">Post</button>
+            <!-- Example file input -->
+            <input
+              type="file"
+              id="fileInput"
+              name="file"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+        </div>
+
+        <div class="post" th:each="post:${posts}">
+          <div class="personInfo">
+            <div>
+              <!-- <span class="image"></span> -->
+              <span class="name">name</span>
+              <span class="tag">@tag</span>
+              <span class="date">-18h</span>
+            </div>
+
+            <i class="fa-solid fa-ellipsis postDots"></i>
+          </div>
+          <p th:text="${post.text}"></p>
+
+          <!-- <div class="postImage"></div> -->
+          <!-- <img
+            id="postImage"
+            src=""
+            alt="Uploaded Image 2"
+            style="max-width: 300px; display: none"
+          /> -->
+
+          <div class="postStats">
+            <div class="comment">
+              <i class="fa-regular fa-comment"></i>
+              <!-- <span class="commentsNum" th:text="${post.commentsNum}">0</span> -->
+            </div>
+
+            <div class="share">
+              <i class="fa-solid fa-arrows-rotate"></i>
+              <span class="sharesNum" th:text="${post.repostNum}">0</span>
+            </div>
+
+            <div
+              class="like"
+              th:attr="onclick='likeplus(' + ${post.postId} + ', event)'"
+            >
+              <i class="fa-regular fa-heart"></i>
+              <span class="likesNum" th:text="${post.users.size()}">0</span>
+            </div>
+
+            <div class="statistcs">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span class="statistcsNum">18</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trends">
+        <div class="searchResults">
+          <div>
+            <div class="image"></div>
+            <div class="info">
+              <span>name</span>
+              <span>@tag</span>
+            </div>
+          </div>
+          <div>
+            <div class="image"></div>
+            <div class="info">
+              <span>name</span>
+              <span>@tag</span>
+            </div>
+          </div>
+        </div>
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+          <i class="fa-solid fa-xmark"></i>
+
+          <!-- ---------------if there no searches  
+          <div class="trendsList">
+            Try searching for people, lists, or keywords
+          </div> ------------------->
+
+          <!-- ----------------if there searches 
+          <div class="trendsList">
+            <div class="recent">
+              <span>Recent</span>
+              <span>Clear all</span>
+            </div>
+
+            <div class="recentList">
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+          </div> -------------------->
+        </div>
+
+        <div class="trendsForYou">
+          <h3>Trends for you</h3>
+
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <span class="showMore">Show more</span>
+        </div>
+
+        <div class="whoToFollow">
+          <h3>Who to follow</h3>
+          <div class="toFollow">
+            <div class="info">
+              <span class="image"></span>
+              <div class="name">
+                <span>name</span>
+                <span>@tag</span>
+              </div>
+            </div>
+            <button>Follow</button>
+          </div>
+
+          <span class="showMore">Show more</span>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

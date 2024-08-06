@@ -1,0 +1,10 @@
+:root{
+    --theme :black;
+    --main-text-color: rgb(230, 230, 230);
+    --second-text-color:rgb(113, 118, 123);
+    --hover-color:rgba(50, 50, 50, 0.7);
+    --active-color: rgb(29, 155, 240);
+    --border-color:rgb(50, 60, 70);
+ 
+
+}
