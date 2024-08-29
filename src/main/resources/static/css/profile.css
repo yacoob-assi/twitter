@@ -1,0 +1,144 @@
+.profileBack{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.profileBack h3,.profileBack i{
+    color: var(--main-text-color);
+
+}
+
+.profileBack i{
+    cursor: pointer;
+}
+
+
+.profileBack #postsNum{
+    font-size: 14px;
+    position: relative;
+    top:-10px
+}
+
+.profileImages {
+    width: 100%;
+    height: 200px;
+    margin: auto;
+    background-image: url('/images/nature.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    position: relative;
+}
+
+.profileImages #imageFront{
+    position: absolute;
+    bottom: -75px;
+    left:40px;
+    border-radius: 50%;
+    border:5px solid black;
+    /* background-image: url(/images/image.jpg); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+
+}
+
+.profileImages #imageFront::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.profileImages #imageFront:hover::after
+ {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.follow{
+    position: relative;
+}
+
+.follow button{
+    position: absolute;
+    right:10px;
+    top:10px;
+    font-weight: bold;
+}
+.ProfileInfo{
+    padding: 10px;
+    padding-top: 100px;
+    border-left:1px solid var(--border-color) ;
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.ProfileInfo h2{
+    color:var(--main-text-color)
+}
+.ProfileInfo i{
+    color: var(--second-text-color);
+    margin-right: 5px;
+}
+
+.ProfileInfo p{
+    color: var(--main-text-color);
+    margin: 20px 0;
+}
+#locationAndDate{
+    display: flex;
+   gap:50px
+
+}
+
+#followersAndFollowing{
+    display: flex;
+    gap:30px;
+    margin-top: 20px;
+}
+
+#followersAndFollowing span:first-child{
+    color: var(--main-text-color);
+    margin-right: 2px;
+}
+
+#activitesList{
+   
+    margin-top: 20px;
+    padding: 0 20%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#activitesList span{
+    padding: 15px;
+    position: relative;
+}
+
+
+
+/*-------------------------- media -------------------*/
+
+.media {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+    padding: 5px;
+    width: 100%;
+   
+}
+
+.media img {
+    width: 100%;
+    height: 150px;
+    cursor: pointer;
+}

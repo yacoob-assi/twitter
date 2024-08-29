@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>notifications</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" th:href="@{/css/notfication.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="leftBar">
+        <a th:href="@{/}"> <i class="fa-solid fa-house"></i></a>
+        <a th:href="notification"> <i class="fa-regular fa-bell"></i></a>
+        <a th:href="profile"> <i class="fa-regular fa-user"></i></a>
+        <div class="addPost">
+          <a href=""> <i class="fa-solid fa-plus"></i></a>
+          <a href=""> <i class="fa-solid fa-feather"></i></a>
+        </div>
+      </div>
+      <div class="main">
+        <h3>Notifications</h3>
+        
+
+        <div class="note" th:each="note:${notes}">
+          <div class="image"></div>
+          <h3 class="name" th:text="${note.getPublisher().getFullName()}">name2</h3>
+          <div class="data">
+            <span>@tag</span>
+            <span th:text="${note.getDate()}">Date</span>
+            <span th:text="${note.getText()}">Date</span>
+          </div>
+          <i class="fa-solid fa-xmark close" th:data-note-id="${note.getId()}"></i>
+        </div>
+</div>
+      <div class="trends">
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" />
+          <i class="fa-solid fa-xmark"></i>
+
+          <!-- ---------------if there no searches  
+          <div class="trendsList">
+            Try searching for people, lists, or keywords
+          </div> ------------------->
+
+          <!-- ----------------if there searches 
+          <div class="trendsList">
+            <div class="recent">
+              <span>Recent</span>
+              <span>Clear all</span>
+            </div>
+
+            <div class="recentList">
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <div>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>text</p>
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+          </div> -------------------->
+        </div>
+
+        <div class="trendsForYou">
+          <h3>Trends for you</h3>
+
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <div class="trend">
+            <span class="numOfPosts">22k</span>
+            <span class="trendName">trend</span>
+          </div>
+          <span class="showMore">Show more</span>
+        </div>
+
+        <div class="whoToFollow">
+          <h3>Who to follow</h3>
+          <div class="toFollow">
+            <div class="info">
+              <span class="image"></span>
+              <div class="name">
+                <span>name</span>
+                <span>@tag</span>
+              </div>
+            </div>
+            <button>Follow</button>
+          </div>
+
+          <span class="showMore">Show more</span>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/myJs/notes.js}"></script>
+  </body>
+</html>

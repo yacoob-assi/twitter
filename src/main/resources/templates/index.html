@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyTwitter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="leftBar">
+        <a th:href="@{/}"> <i class="fa-solid fa-house"></i></a>
+        <a th:href="notification"> <i class="fa-regular fa-bell"></i></a>
+        <a th:href="profile"> <i class="fa-regular fa-user"></i></a>
+        <div th:class="addPost">
+          <a href=""> <i class="fa-solid fa-plus"></i></a>
+          <a href=""> <i class="fa-solid fa-feather"></i></a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="topBar">
+          <ul>
+              <li class="active" id="forYou" th:data-user="${user.userId}" onclick="getAllPosts(this)">For you</li>
+              <li id="following" th:data-user="${user.userId}" onclick="following(this)">Following</li>
+              <li id="xNews">X News</li>
+          </ul>
+      </div>
+
+        <div class="searchBox">
+          <span class="target">Everyone</span>
+          <div class="image" th:style="'background-image: url(\'/user/image/' + ${user.userId} + '\')'"></div>
+
+          <textarea
+            id="myTextarea"
+            type="text"
+            oninput="autoResize()"
+            placeholder="What is happening?!!"
+          ></textarea>
+
+          <!-- Add any additional form elements as needed -->
+
+          <span class="reply">
+            <i class="fa-solid fa-earth-americas"></i>
+            Everyone can reply
+          </span>
+          <div id="imagePreview"></div>
+          <div class="bottom">
+            <div class="icons">
+              <i id="imagePicker" class="fa-solid fa-image"></i>
+              <i class="fa-regular fa-face-smile"></i>
+              <i class="fa-solid fa-video"></i>
+            </div>
+            <button id="post" onclick="submitForm(event)">Post</button>
+            <!-- Example file input -->
+            <input
+              type="file"
+              id="fileInput"
+              name="file"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+        </div>
+      <div id="postsContainer">
+        <div class="post" th:each="post:${posts}">
+          <div class="personInfo">              
+            
+
+            <div>
+              <a th:href="@{/userprofile/{userId}(userId=${post.user.userId})}"><span class="image" th:style="'background-image: url(\'/user/image/' + ${post.user.userId} + '\')'"></span></a>
+
+              <a href="" class="name" th:text="${post.getUser().getName()}" style="color: white;">name</a>
+              <span class="tag" th:text="${post.tag}"></span>
+              <!-- <span id="username" th:text="${user.getEmail()}">User</span> -->
+              <span class="date" th:text="${post.date}"></span>
+            </div>
+
+            <i class="fa-solid fa-ellipsis postDots"></i>
+          </div>
+          <p th:text="${post.text}"></p>
+
+          <div th:if="${post.image != null}" style="display:flex; justify-content: center; margin-bottom: 10px;">
+            <img th:src="@{/post/image/{postId}(postId=${post.postId})}" style="width: 70%;">
+        </div>
+       
+          
+          <div class="postStats">
+      <a th:href="@{/comments/{postId}(postId=${post.postId})}">
+            <div class="comment">
+                <i class="fa-regular fa-comment"></i>
+                <span class="commentsNum" th:text="${ post.getComments().size()}">0</span>
+              </div>
+        </a>
+         
+
+            <div class="share" th:attr="data-post-id=${post.postId}" >
+           <i class="fa-solid fa-arrows-rotate"
+              th:style="${post.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">
+           </i>
+           <span class="sharesNum" th:text="${post.repostNum}" 
+           th:style="${post.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">0</span>
+       </div>
+      <div class="like" th:attr="data-post-id=${post.postId}">
+          <i class="fa-heart" 
+             th:classappend="${post.likes.contains(user)} ? 'fa-solid' : 'fa-regular'" 
+             th:data-action="${post.likes.contains(user)} ? 'unlike' : 'like'">
+          </i> 
+          <span class="likesNum" th:text="${post.likes.size()}">0</span>
+      </div>
+
+            <div class="statistcs">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span class="statistcsNum" th:text="${post.statisics}">8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+		</div>
+      <div class="trends">
+        <div class="searchResults hidden" id="searchResults">
+         
+        
+        </div>
+        <div class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search" id="searchInput"/>
+          <i class="fa-solid fa-xmark" id="clearButton"></i>
+  </div>
+
+        <div class="trendsForYou">
+          <h3>Trends for you</h3>
+          <div class="trend" th:each="trend : ${trends}">
+            <span class="numOfPosts" th:text="${trend.statisics}">22k</span>
+            <span class="trendName" th:text="${trend.hashTag}">trend</span>
+          </div>
+         
+          <span class="showMore">Show more</span>
+        </div>
+
+        <div class="whoToFollow">
+          <h3>Who to follow</h3>
+          <div class="toFollow" th:each="follow : ${toFollow}">
+            <div class="info">
+              <span class="image" th:style="'background-image: url(\'/user/image/' + ${follow.userId} + '\')'"></span>
+              <div class="name">
+                <span th:text="${follow.name}">name</span>
+                <span th:text="${follow.name}">@tag</span>
+              </div>
+            </div>
+            <button class="toFollowButton"
+            th:data-follower-id="${follow.userId}"
+            th:data-user-id="${user.userId}"
+            th:data-action="'follow'">
+        Follow
+    </button>
+
+          </div>
+
+          <span class="showMore">Show more</span>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/myJS/main.js}"></script>
+    <script th:src="@{/js/myJS/posts.js}"></script>
+    <script th:src="@{/js/myJS/follower.js}"></script>
+    <script th:src="@{/js/myJS/search.js}"></script>
+
+  </body>
+</html>

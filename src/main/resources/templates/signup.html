@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <link rel="stylesheet" href="../static/css/constants.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/all.min.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
+    <title>signup</title>
+  </head>
+  <body>
+    <div class="page">
+      <form action="">
+        <h1>Sign up to X</h1>
+        <form th:action="@{/auth/signup/}"></form>
+        <input type="text" placeholder="name" name="name"/>
+        <input type="email" placeholder="email" name="email"/>
+        <input type="password" placeholder="password" name="password">
+        <button>Next</button>
+        <div class="haveAccount">
+          Already have an account? <a href="login.html">login</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Load CSS files -->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    
+    <!-- Load fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="page">
+      <form action="/login" method="post">
+        <h1>Sign in to X</h1>
+        <input type="text" placeholder="Email" name="username"  />
+        <input type="password" placeholder="Password" name="password"  />
+        <button >Login</button>
+        <div class="noAccount">
+            Don't have an account? <a th:href="@{/signup}">Sign up</a>
+        </div>
+      </form>
+    </div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyTwitter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/css/constants.css}" />
+    <link rel="stylesheet" th:href="@{/css/all.min.css}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+ 
+  </head>
+  <body>
+    <div class="container">
+    
+      <div class="main">
+       
+        <div class="post" th:each="post:${parentPost}">
+          <div class="personInfo">              
+            
+
+            <div>
+              <span class="image" th:style="'background-image: url(\'/user/image/' + ${user.userId} + '\')'"></span>
+
+              <a href="" class="name" style="color: white;" th:text="${post.getUser().getName()}">name</a>
+              <span class="tag"th:text="${post.tag}" ></span>
+              <span class="date" th:text="${post.date}"></span>
+            </div>
+
+            <i class="fa-solid fa-ellipsis postDots"></i>
+          </div>
+          <p th:text="${post.text}"></p>
+
+          <div th:if="${post.image != null}" style="display:flex; justify-content: center; margin-bottom: 10px;">
+            <img th:src="@{/post/image/{postId}(postId=${post.postId})}" style="width: 70%;">
+        </div>
+          <div class="postStats">
+            <a th:href="@{/comments/{postId}(postId=${post.postId})}">
+              <div class="comment">
+                  <i class="fa-regular fa-comment"></i>
+                  <span class="commentsNum" th:text="${ post.getComments().size()}">0</span>
+              </div>
+          </a>
+
+          <div class="share" th:attr="data-post-id=${post.postId}" >
+            <i class="fa-solid fa-arrows-rotate"
+               th:style="${post.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">
+            </i>
+            <span class="sharesNum" th:text="${post.repostNum}" 
+            th:style="${post.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">0</span>
+        </div>
+       <div class="like" th:attr="data-post-id=${post.postId}">
+        <i class="fa-heart" 
+           th:classappend="${post.likes.contains(user)} ? 'fa-solid' : 'fa-regular'" 
+           th:data-action="${post.likes.contains(user)} ? 'unlike' : 'like'">
+        </i> 
+        <span class="likesNum" th:text="${post.likes.size()}">0</span>
+    </div>
+
+            <div class="statistcs">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span class="statistcsNum" th:text="${post.statisics}">18</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="searchBox">
+          <span class="target">Everyone</span>
+          <div class="image" th:style="'background-image: url(\'/user/image/' + ${user.userId} + '\')'"></div>
+
+          <textarea
+            id="myTextarea"
+            type="text"
+            oninput="autoResize()"
+            placeholder="comment on this post"
+          ></textarea>
+
+          <!-- Add any additional form elements as needed -->
+
+          <span class="reply">
+            <i class="fa-solid fa-earth-americas"></i>
+            Everyone can reply
+          </span>
+          <div id="imagePreview"></div>
+          <div class="bottom">
+            <div class="icons">
+              <i id="imagePicker" class="fa-solid fa-image"></i>
+              <i class="fa-regular fa-face-smile"></i>
+              <i class="fa-solid fa-video"></i>
+            </div>
+            <button id="post" th:onclick="'addComment(' + ${parentPost.postId} + ')'">Post</button>
+            <!-- Example file input -->
+            <input
+              type="file"
+              id="fileInput"
+              name="file"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+        </div>
+
+        <!-- ///////////////////////////////////////////////////////// -->
+
+
+
+
+
+
+
+        <div class="post" th:each="comment:${comments}">
+          <div class="personInfo">              
+            
+
+            <div>
+              <span class="image" th:style="'background-image: url(\'/user/image/' + ${user.userId} + '\')'"></span>
+
+              <a href="" class="name" style="color: white;"th:text="${comment.getUser().getName()}">name</a>
+              <span class="tag"th:text="${comment.tag}" ></span>
+              <span class="date" th:text="${comment.date}"></span>
+            </div>
+
+            <i class="fa-solid fa-ellipsis postDots"></i>
+          </div>
+          <p th:text="${comment.text}"></p>
+
+          <div th:if="${comment.image != null}" style="display:flex; justify-content: center; margin-bottom: 10px;">
+            <img th:src="@{/post/image/{postId}(postId=${comment.postId})}" style="width: 70%;">
+        </div>
+          <div class="postStats">
+            <a th:href="@{/comments/{postId}(postId=${comment.postId})}">
+              <div class="comment">
+                  <i class="fa-regular fa-comment"></i>
+                  <span class="commentsNum" th:text="${ comment.getComments().size()}">0</span>
+                </div>
+          </a>
+
+          <div class="share" th:attr="data-post-id=${comment.postId}" >
+            <i class="fa-solid fa-arrows-rotate"
+               th:style="${comment.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">
+            </i>
+            <span class="sharesNum" th:text="${comment.repostNum}" 
+            th:style="${comment.usersRepost.contains(user) ? 'color: rgb(29, 221, 155);' : ''}">0</span>
+        </div>
+       <div class="like" th:attr="data-post-id=${comment.postId}">
+        <i class="fa-heart" 
+           th:classappend="${comment.likes.contains(user)} ? 'fa-solid' : 'fa-regular'" 
+           th:data-action="${comment.likes.contains(user)} ? 'unlike' : 'like'">
+        </i> 
+        <span class="likesNum" th:text="${comment.likes.size()}">0</span>
+    </div>
+
+            <div class="statistcs">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span class="statistcsNum" th:text="${comment.statisics}">18</span>
+            </div>
+          </div>
+        </div>
+		</div>
+    
+    </div>
+    <script th:src="@{/js/myJS/comment.js}"></script>
+    <script th:src="@{/js/myJS/main.js}"></script>
+    <script th:src="@{/js/myJS/posts.js}"></script>
+  
+    
+  </body>
+</html>

@@ -1,0 +1,673 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+}
+body{
+    background-color: var(--theme);
+    padding: 0;
+    font-family: serif;
+    font-family: "Rubik",x sans-serif;
+
+}
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;;
+}
+
+.container{
+    display: flex;
+    margin: auto;
+    height: 100vh;
+ 
+
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.main{
+flex:9;
+border-top: none;
+
+
+}
+.leftBar{
+    flex:1
+}
+.trends{
+    flex:3
+}
+
+.topBar{
+    color:var(--second-text-color);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    border: 1px solid var(--border-color);
+}
+
+.topBar ul{
+    display: flex;
+    gap:20px;
+    position: relative;
+
+
+}
+
+.topBar li{
+    display: block;
+    padding: 15px 10px;
+    position: relative;
+  
+}
+
+.active::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: var(--active-color);    
+   
+}
+
+.topBar li .active{
+    color: var(--main-text-color);
+    font-weight: bold;
+
+    
+}
+
+.topBar li:hover,#activitesList span:hover{
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.searchBox{
+    width: 100%;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+.searchBox img{
+    margin: auto;
+    border-radius: 15px;
+}
+
+ .searchBox .image,.note .image,.searchResults .image{
+    margin:10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+   position: relative;
+}
+
+.searchBox .image{
+    position: absolute;
+}
+.searchBox .image::after,.personInfo .image::after,.note .image::after{ 
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color:rgba(0, 0, 0, 0);
+    top:0;
+    left: 0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.searchBox .image:hover::after, .personInfo .image:hover::after,.note .image:hover::after,.searchResults >div::after{
+     background-color: rgba(0, 0, 0, 0.2);
+}
+.searchBox textarea{
+    width: 75%;
+    max-height: 300px;
+    margin: auto;
+    padding-top: 20px ;
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+    display: block;
+    word-break: break-all;
+    resize: none;
+    overflow: hidden;
+    background-color: var(--theme)
+}
+
+.searchBox .target{
+    padding: 5px 10px;
+    color: var(--active-color);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    display: inline-block;
+    margin-top: 10px;
+    position: relative;
+    left: 15%;
+    cursor: pointer;
+   
+}
+.searchBox .reply{
+    color: var(--active-color);
+    position: relative;
+    bottom: 15px;
+    left:12%;
+    cursor: pointer;
+   
+
+}
+.searchBox .bottom{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    /* border-top: 1px solid var(--border-color); */
+
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    
+}
+.searchBox .bottom .icons i{
+    color:var(--active-color);
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.searchBox .bottom button{
+    background-color: var(--active-color);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+
+
+/* ///////////////////leftBar style/////////////////////////// */
+
+
+.leftBar{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    align-items: end;
+    padding-right: 20px;
+    padding-top: 30px;
+}
+
+.leftBar i{
+    font-size: 25px;
+    color: white;
+
+}
+
+.leftBar .addPost{
+    position: relative;
+    background-color: var(--active-color);
+    border-radius: 50%;
+    padding: 15px;
+    right: -10px;
+    cursor: pointer;
+}
+
+.leftBar .addPost a:first-child i{
+    font-size: 12px;
+    position: absolute;
+    top: 5px;
+    left:20px;
+    font-weight: bold;
+    
+}
+.leftBar >a:not(:last-child ) {
+        padding: 10px;
+        border-radius: 50%;
+        transition: 0.3s;
+
+}
+
+.leftBar>a:not(:last-child):hover {
+        background-color: var(--hover-color);
+}
+.leftBar>a:nth-child(3),.leftBar>a:nth-child(2){
+    position: relative;
+}
+.leftBar > a:nth-child(3)::after,
+.leftBar > a:nth-child(2)::after {
+    
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--active-color);
+    z-index: 10;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 14px;
+    display:none
+}
+
+.leftBar > a.hide-after::after {
+    display: none;
+}
+.leftBar > a.show-after::after {
+    content: attr(data-count);
+    display: flex;
+}
+
+
+/* ///////////////////trend style/////////////////////////// */
+.trends{
+    padding: 5px 50px;
+    position: relative;
+   
+}
+.trends .search{
+    position: absolute;
+    width: 100%;
+    left: 10px;
+}
+.trends .search input{
+    background-color: rgb(40, 40, 50);
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px;
+    border-radius: 20px;
+    font-size: 17px;
+    color: white;
+    
+}
+
+.trends .search i:first-of-type{
+    position: absolute;
+    left:10px;
+    top:10px;
+    font-size: 17px;
+    color:var(--second-text-color)
+}
+
+
+.trends .search >i:last-of-type{
+
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    background-color: var(--active-color);
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.trends > div:not(:first-child){
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+
+.trends .trendsList{
+    position: absolute;
+    width: 100%;
+   border: 1px solid var(--border-color);
+   padding: 10px 0;
+   color: var(--second-text-color);
+   border-radius: 15px;
+   text-align: center;
+   margin-top: 1px;
+   /* display: none; */
+   
+}
+
+.trends .liveOnX{
+    margin-top: 100px;
+    height: 30px;
+}
+
+.trendsList .recent{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.trendsList span:first-child{
+    color: var(--main-text-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.trendsList span:last-child{
+    color: var(--active-color);
+    cursor: pointer;
+}
+
+.trendsList .recentList >div{
+position: relative;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 20px 10px;
+margin-top: 10px;
+cursor: pointer;
+transition: 0.3s;
+
+}
+
+
+.trendsList .recentList>div:hover{
+   background-color: var(--hover-color);
+}
+
+.trends .recentList p{
+    width: 100%;
+    text-align: left;
+    color: var(--main-text-color);
+    padding-left: 30px;
+
+}
+
+.trends .recentList i:first-child {
+    position: relative;
+    top:2px;
+    color: var(--main-text-color);
+}
+
+.recentList i:last-child {
+
+    color: var(--active-color);
+    position: relative;
+        
+}
+
+.trends .recentList i:last-child::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgb(30,30,90);
+    right: -4px;
+    bottom: -3px; 
+   
+    z-index: -1;
+    transition: 0.3s;
+   
+}
+
+.recentList i:last-child:hover::after{
+        visibility: visible;
+}
+
+
+.trend
+.trends .recentList i:last-child:hover {
+
+    
+
+    color: var(--active-color)
+}
+
+
+.trendsForYou {
+ width: 100%;
+ height: 700px;
+ margin-top: 100px;
+ position: relative;
+}
+
+
+ h3{
+    color: var(--main-text-color);
+    margin: 10px;
+}
+
+.trendsForYou .trend,.toFollow{
+    display: flex;
+    align-items: center;
+    padding: 20px 10px ;
+    justify-content: space-between;
+   cursor: pointer;
+   transition: 0.5s;
+
+}
+
+.trendsForYou .trend:hover,.toFollow:hover,.note:hover,.searchResults>div:hover{
+    background-color: var(--hover-color);
+    
+}
+
+.trendsForYou .trend span:first-child{
+    color:var(--second-text-color);
+}
+
+.trendsForYou .trend span:last-child {
+    color: var(--main-text-color);
+}
+
+.whoToFollow{
+    margin-top: 20px;
+    height: 300px;
+    position: relative;
+}
+
+.showMore{
+    color: var(--active-color);
+    margin: 10px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+.toFollow .info{
+    display: flex;
+    gap: 10px;
+}
+
+.toFollow .info .name{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.toFollow .info .name span:first-child{
+    color: var(--main-text-color);
+    font-size:18px ;
+}
+
+.toFollow button,.follow button{
+    background-color: var(--main-text-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.searchResults{
+    position: absolute;
+    top: 46px;
+    width:90%;
+    left: 20px;
+    height: 400px;
+    z-index: 1;
+    background-color: var(--theme);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+   
+
+}
+
+.searchResults >a>div{
+    height: 40px;
+    display: flex;
+    gap:10px;
+   
+    align-items: center;
+    cursor: pointer;
+    padding:30px 0 ;
+ 
+}
+
+.searchResults .info {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResults .info span:first-child{
+    color: var(--main-text-color);
+    font-size: 20px;
+}
+/* ////// post ///////////////// */
+
+
+
+.post{
+    width: 100%;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    cursor: pointer;
+   
+}
+
+.post .personInfo{
+    display: flex;
+    justify-content: space-between;
+ 
+}
+
+.post .personInfo div {
+    display: flex;
+    gap: 10px;
+}
+
+
+.post .personInfo div,.personInfo i{
+    color:var(--second-text-color);
+    transition: 0.3s;
+}
+
+.post .personInfo .image,.toFollow .info >span {
+    display: inline-block; /* Ensures that the element can be sized */
+    width: 40px;           /* Adjust width as needed */
+    height: 40px;          /* Adjust height as needed */
+    border-radius: 50%;   /* Makes the element circular */
+    background-size: cover; /* Ensure the image covers the element */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; 
+    position: relative;
+}
+.post .personInfo div a:nth-child(2) {
+ 
+color: var(--main-text-color);
+transition: 0.3s;
+}
+
+.post .personInfo div a:nth-child(2):hover {
+    text-decoration: underline;
+}
+
+.post p{
+    color: var(--main-text-color);
+    text-align: right;
+    line-height: 1.7;
+}
+
+.post .postImage{
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
+    left: 10%;
+    /* background-image: url('/images/image.jpg'); */
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
+    /* background-size: contain; */
+
+}
+
+
+.post .postStats{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.post .postStats div{
+   cursor: pointer;
+  
+}
+.post .postStats .fa-solid.fa-heart{
+	color: rgb(221, 29, 155);
+}
+.post .postStats i,span{
+    color: var(--second-text-color);
+}
+
+
+.post .postStats i{
+    font-size: 20px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.post .postStats div:first-child:hover i,.post .postStats div:first-child:hover span,
+.post .postStats div:last-child:hover i,
+.post .postStats div:last-child:hover span,
+.personInfo i:hover,.note i:hover{
+    color: rgb(29, 155, 221);
+}  
+
+
+
+.post .postStats div:nth-child(2):hover i,
+.post .postStats div:nth-child(2):hover span {
+    color: rgb(29, 221, 155);
+    
+}
+
+.post .postStats div:nth-child(3):hover i,
+.post .postStats div:nth-child(3):hover span {
+    color: rgb(221, 29, 155);
+
+}
+.reposted{
+    color:rgb(29, 221, 155);
+}
+.hidden {
+    display: none;
+}
+.visible {
+    display: block;
+}
+.post p{
+    direction: ltr; 
+    text-align: left; 
+    display: flex;
+  
+}
